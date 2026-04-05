@@ -2,6 +2,8 @@
 
 Personal skills repository for reusable Codex/Cursor workflows, plus a small set of personal custom skills.
 
+- Chinese version: [README.zh.md](./README.zh.md)
+
 ## Overview
 
 This repository is the canonical remote home for skills that are useful across local AI coding tools.
@@ -23,9 +25,10 @@ The repository is intended to support these use cases:
 ```text
 skills/
 ├── README.md
+├── README.zh.md
 ├── scripts/
-│   └── install_skill.py
 │   ├── sync_skills.py
+│   ├── install_skill.py
 │   └── validate_index.py
 ├── skills-index.json
 ├── general/
