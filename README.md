@@ -31,7 +31,8 @@ skills/
 ├── general/
 │   ├── ai-sync/
 │   ├── docs/
-│   └── planning/
+│   ├── planning/
+│   └── repository-maintenance/
 └── personal-custom/
     ├── design/
     ├── logs/
@@ -44,6 +45,7 @@ skills/
   - `ai-sync/`: Skills for shared AI context bootstrap and synchronization.
   - `docs/`: Skills for documentation rendering and review workflows.
   - `planning/`: Skills for task decomposition and execution planning.
+  - `repository-maintenance/`: Skills for maintaining this skills repository and its catalog.
 - `personal-custom/`: Skills tailored to personal workflows, machine setup, or project-specific processes.
   - `machine-setup/`: Skills for local shell and development environment setup.
   - `design/`: Skills for design-to-code workflows.
@@ -73,6 +75,7 @@ Use `personal-custom/` when a skill is:
 | `project-ai-sync-bootstrap` | General | AI Sync | Bootstrap shared AI context and sync scaffolding in a new repository. | `general/ai-sync/project-ai-sync-bootstrap/` |
 | `md-browser-preview` | General | Docs | Render Markdown to HTML and preview it in a browser. | `general/docs/md-browser-preview/` |
 | `task-subagent-planner` | General | Planning | Turn task-marked requests into review-first subagent execution plans. | `general/planning/task-subagent-planner/` |
+| `skills-repo-maintainer` | General | Repository Maintenance | Use the repository maintenance scripts to sync local skills, validate the index, and manage installs. | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | Restore the standard development environment baseline on this Mac. | `personal-custom/machine-setup/machine-dev-bootstrap/` |
 | `zsh-setup` | Personal Custom | Machine Setup | Configure and troubleshoot zsh themes, plugins, and prompt styles. | `personal-custom/machine-setup/zsh-setup/` |
 | `sketch-to-android` | Personal Custom | Design | Generate Android View-based UI code from Sketch designs. | `personal-custom/design/sketch-to-android/` |
@@ -89,6 +92,7 @@ The same catalog is also available in machine-readable form:
 - Choose `general/ai-sync/*` when you want to bootstrap or maintain cross-tool AI instructions.
 - Choose `general/docs/*` when you need document rendering or review helpers.
 - Choose `general/planning/*` when you want the assistant to decompose work before execution.
+- Choose `general/repository-maintenance/*` when you want to maintain this repository itself, sync local skill sources, or validate the catalog.
 - Choose `personal-custom/machine-setup/*` when the task is about terminal, shell, or machine bootstrap.
 - Choose `personal-custom/design/*` when the task is about converting Sketch designs into Android UI code.
 - Choose `personal-custom/logs/*` when the task is about personal or project progress tracking.
@@ -229,10 +233,11 @@ For day-to-day maintenance of this repository:
 
 1. Update or create a skill in its real working source location.
 2. Ensure `skills-index.json` is correct.
-3. Run `scripts/sync_skills.py` to pull the latest local skill contents into this repository.
-4. Run `scripts/validate_index.py`.
-5. Review the git diff.
-6. Commit and push to `develop`.
+3. Use `general/repository-maintenance/skills-repo-maintainer/` when you want the assistant to drive this workflow consistently.
+4. Run `scripts/sync_skills.py` to pull the latest local skill contents into this repository.
+5. Run `scripts/validate_index.py`.
+6. Review the git diff.
+7. Commit and push to `develop`.
 
 ## Contribution Workflow
 

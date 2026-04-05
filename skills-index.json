@@ -32,6 +32,14 @@
     "summary": "Turn task-marked requests into review-first subagent execution plans."
   },
   {
+    "name": "skills-repo-maintainer",
+    "scope": "general",
+    "category": "repository-maintenance",
+    "path": "general/repository-maintenance/skills-repo-maintainer",
+    "portable": true,
+    "summary": "Drive install, sync, and validation workflows for this skills repository."
+  },
+  {
     "name": "machine-dev-bootstrap",
     "scope": "personal-custom",
     "category": "machine-setup",

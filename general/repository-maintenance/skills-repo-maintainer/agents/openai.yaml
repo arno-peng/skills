@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skills Repo Maintainer"
+  short_description: "Maintain the skills repository with indexed scripts"
+  default_prompt: "Use $skills-repo-maintainer to sync local skills into this repository, validate the index, and install indexed skills."
