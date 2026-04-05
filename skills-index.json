@@ -1,0 +1,82 @@
+[
+  {
+    "name": "cross-tool-ai-sync",
+    "scope": "general",
+    "category": "ai-sync",
+    "path": "general/ai-sync/cross-tool-ai-sync",
+    "portable": true,
+    "summary": "Sync shared AI context across Codex, Cursor, and Claude."
+  },
+  {
+    "name": "project-ai-sync-bootstrap",
+    "scope": "general",
+    "category": "ai-sync",
+    "path": "general/ai-sync/project-ai-sync-bootstrap",
+    "portable": true,
+    "summary": "Bootstrap shared AI context and sync scaffolding in a new repository."
+  },
+  {
+    "name": "md-browser-preview",
+    "scope": "general",
+    "category": "docs",
+    "path": "general/docs/md-browser-preview",
+    "portable": true,
+    "summary": "Render Markdown to HTML and preview it in a browser."
+  },
+  {
+    "name": "task-subagent-planner",
+    "scope": "general",
+    "category": "planning",
+    "path": "general/planning/task-subagent-planner",
+    "portable": true,
+    "summary": "Turn task-marked requests into review-first subagent execution plans."
+  },
+  {
+    "name": "machine-dev-bootstrap",
+    "scope": "personal-custom",
+    "category": "machine-setup",
+    "path": "personal-custom/machine-setup/machine-dev-bootstrap",
+    "portable": false,
+    "summary": "Restore the standard development environment baseline on this Mac."
+  },
+  {
+    "name": "zsh-setup",
+    "scope": "personal-custom",
+    "category": "machine-setup",
+    "path": "personal-custom/machine-setup/zsh-setup",
+    "portable": false,
+    "summary": "Configure and troubleshoot zsh themes, plugins, and prompt styles."
+  },
+  {
+    "name": "sketch-to-android",
+    "scope": "personal-custom",
+    "category": "design",
+    "path": "personal-custom/design/sketch-to-android",
+    "portable": false,
+    "summary": "Generate Android View-based UI code from Sketch designs."
+  },
+  {
+    "name": "sketch-to-compose",
+    "scope": "personal-custom",
+    "category": "design",
+    "path": "personal-custom/design/sketch-to-compose",
+    "portable": false,
+    "summary": "Generate Jetpack Compose UI code from Sketch designs."
+  },
+  {
+    "name": "parttime-work-log",
+    "scope": "personal-custom",
+    "category": "logs",
+    "path": "personal-custom/logs/parttime-work-log",
+    "portable": false,
+    "summary": "Record and summarize personal part-time work logs."
+  },
+  {
+    "name": "work-progress-log",
+    "scope": "personal-custom",
+    "category": "logs",
+    "path": "personal-custom/logs/work-progress-log",
+    "portable": false,
+    "summary": "Track and summarize Siuper project progress notes."
+  }
+]
