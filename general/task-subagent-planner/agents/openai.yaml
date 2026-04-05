@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task Subagent Planner"
+  short_description: "Split marked tasks into review-first subagent plans"
+  default_prompt: "Use $task-subagent-planner to split this task into independent subagent commands for my approval before execution."
