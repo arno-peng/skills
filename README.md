@@ -32,6 +32,37 @@ Personal Cursor skills repository.
 
 Copy the desired skill folders into a project's `.cursor/skills/` or `.codex/skills/` directory, keeping each skill folder self-contained with its `SKILL.md` and companion assets/scripts.
 
+### Install Examples
+
+Clone the repository locally:
+
+```bash
+git clone --branch develop git@github.com:arno-peng/skills.git
+```
+
+Install a skill into a project's Codex skills directory:
+
+```bash
+mkdir -p .codex/skills
+cp -R /path/to/skills/general/docs/md-browser-preview .codex/skills/
+```
+
+Install a skill into a project's Cursor skills directory:
+
+```bash
+mkdir -p .cursor/skills
+cp -R /path/to/skills/general/planning/task-subagent-planner .cursor/skills/
+```
+
+Install a personal custom skill:
+
+```bash
+mkdir -p .codex/skills
+cp -R /path/to/skills/personal-custom/design/sketch-to-compose .codex/skills/
+```
+
+After copying a skill, keep the folder name unchanged and preserve any bundled `scripts/`, `assets/`, `references/`, or `agents/` subdirectories.
+
 ## Branch
 
 - Primary working branch: `develop`.
