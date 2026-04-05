@@ -23,6 +23,8 @@ The repository is intended to support these use cases:
 ```text
 skills/
 ├── README.md
+├── scripts/
+│   └── install_skill.py
 ├── skills-index.json
 ├── general/
 │   ├── ai-sync/
@@ -93,6 +95,46 @@ The same catalog is also available in machine-readable form:
 
 Copy the desired skill folders into a project's `.cursor/skills/` or `.codex/skills/` directory, keeping each skill folder self-contained with its `SKILL.md` and companion assets/scripts.
 
+For repeatable installs, prefer the included installer script instead of manual copying.
+
+### Installer Script
+
+List all indexed skills:
+
+```bash
+python3 scripts/install_skill.py --list
+```
+
+List only general skills:
+
+```bash
+python3 scripts/install_skill.py --list --scope general
+```
+
+Install one skill into the current project's Codex skills directory:
+
+```bash
+python3 scripts/install_skill.py md-browser-preview --tool codex --project-root .
+```
+
+Install multiple skills into the current project's Cursor skills directory:
+
+```bash
+python3 scripts/install_skill.py cross-tool-ai-sync task-subagent-planner --tool cursor --project-root .
+```
+
+Overwrite an existing installation:
+
+```bash
+python3 scripts/install_skill.py md-browser-preview --tool codex --project-root . --force
+```
+
+Install directly into a custom target directory:
+
+```bash
+python3 scripts/install_skill.py sketch-to-compose --target-dir /absolute/path/to/.codex/skills
+```
+
 ### Install Examples
 
 Clone the repository locally:
@@ -150,8 +192,9 @@ For a new or updated skill:
 2. Keep the skill self-contained with `SKILL.md` plus only the resources it actually needs.
 3. Place it under the correct category in this repository.
 4. Update `skills-index.json`.
-5. Update the README index if the catalog changed.
-6. Commit to `develop`.
+5. Ensure `scripts/install_skill.py --list` still reflects the new catalog correctly.
+6. Update the README index if the catalog changed.
+7. Commit to `develop`.
 
 ## Quality Bar
 
