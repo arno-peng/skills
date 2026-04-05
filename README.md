@@ -25,6 +25,8 @@ skills/
 ├── README.md
 ├── scripts/
 │   └── install_skill.py
+│   ├── sync_skills.py
+│   └── validate_index.py
 ├── skills-index.json
 ├── general/
 │   ├── ai-sync/
@@ -135,6 +137,43 @@ Install directly into a custom target directory:
 python3 scripts/install_skill.py sketch-to-compose --target-dir /absolute/path/to/.codex/skills
 ```
 
+### Validation Script
+
+Validate that `skills-index.json` matches the repository contents:
+
+```bash
+python3 scripts/validate_index.py
+```
+
+### Sync Script
+
+Sync selected skills from local source roots into this repository:
+
+```bash
+python3 scripts/sync_skills.py md-browser-preview task-subagent-planner \
+  --source-root ~/.codex/skills \
+  --source-root ~/project/Siuper/siuper-sdk-android/.codex/skills
+```
+
+Sync all indexed skills from a set of local roots:
+
+```bash
+python3 scripts/sync_skills.py --all \
+  --source-root ~/.codex/skills \
+  --source-root ~/project/Siuper/siuper-sdk-android/.codex/skills \
+  --source-root ~/project/Siuper/.codex/skills
+```
+
+Preview what would be synced without writing changes:
+
+```bash
+python3 scripts/sync_skills.py --all \
+  --source-root ~/.codex/skills \
+  --source-root ~/project/Siuper/siuper-sdk-android/.codex/skills \
+  --source-root ~/project/Siuper/.codex/skills \
+  --dry-run
+```
+
 ### Install Examples
 
 Clone the repository locally:
@@ -184,6 +223,17 @@ cp -R /path/to/skills/general/planning/task-subagent-planner .codex/skills/
 
 If a skill affects shared AI context or tool adapters inside a target project, run that project's sync command after installation when applicable.
 
+## Maintenance Workflow
+
+For day-to-day maintenance of this repository:
+
+1. Update or create a skill in its real working source location.
+2. Ensure `skills-index.json` is correct.
+3. Run `scripts/sync_skills.py` to pull the latest local skill contents into this repository.
+4. Run `scripts/validate_index.py`.
+5. Review the git diff.
+6. Commit and push to `develop`.
+
 ## Contribution Workflow
 
 For a new or updated skill:
@@ -193,8 +243,9 @@ For a new or updated skill:
 3. Place it under the correct category in this repository.
 4. Update `skills-index.json`.
 5. Ensure `scripts/install_skill.py --list` still reflects the new catalog correctly.
-6. Update the README index if the catalog changed.
-7. Commit to `develop`.
+6. Run `scripts/validate_index.py`.
+7. Update the README index if the catalog changed.
+8. Commit to `develop`.
 
 ## Quality Bar
 
