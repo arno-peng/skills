@@ -7,13 +7,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
-
-def load_index(index_path: Path) -> List[Dict]:
-    with index_path.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    if not isinstance(data, list):
-        raise ValueError("skills-index.json must contain a top-level list")
-    return data
+from lib.skills_repo import load_index, repo_root
 
 
 def format_skill(entry: Dict) -> str:
@@ -82,6 +76,7 @@ def main() -> int:
     parser.add_argument(
         "--list", action="store_true", help="List indexed skills instead of installing"
     )
+    parser.add_argument("--json", action="store_true", help="Emit JSON when listing")
     parser.add_argument(
         "--scope",
         choices=["general", "personal-custom"],
@@ -108,11 +103,19 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    repo_root = Path(__file__).resolve().parents[1]
-    index_path = repo_root / "skills-index.json"
-    entries = load_index(index_path)
+    root = repo_root()
+    entries = load_index()
 
     if args.list:
+        if args.json:
+            filtered = [
+                entry
+                for entry in entries
+                if (args.scope is None or entry.get("scope") == args.scope)
+                and (args.category is None or entry.get("category") == args.category)
+            ]
+            print(json.dumps(filtered, ensure_ascii=False, indent=2))
+            return 0 if filtered else 1
         return list_skills(entries, args.scope, args.category)
 
     if not args.skills:
@@ -127,7 +130,7 @@ def main() -> int:
 
     target_dir = resolve_target_dir(args)
     for name in args.skills:
-        install_skill(index_by_name[name], repo_root, target_dir, args.force)
+        install_skill(index_by_name[name], root, target_dir, args.force)
     return 0
 
 

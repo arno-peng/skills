@@ -7,9 +7,9 @@ description: Use when the user asks to organize a markdown document for review, 
 
 Use this skill when the user asks to:
 
-- 整理一个 `*.md` 文档并给他预览
-- 打开某个 `*.md` 文档
-- 用浏览器查看 markdown，而不是直接看原始文本
+- organize a `*.md` document and preview it
+- open a markdown document in the browser
+- view rendered markdown instead of raw source
 
 ## Workflow
 
@@ -38,4 +38,4 @@ python3 ~/.codex/skills/md-browser-preview/scripts/render_markdown_preview.py --
 
 - Prefer absolute markdown paths when invoking the script.
 - The renderer is offline and self-contained; it does not require network access.
-- If the environment blocks browser launching, request approval to run the open command or tell the user the generated HTML path.
+- If browser launch is blocked, return the generated HTML path.

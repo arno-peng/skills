@@ -27,8 +27,9 @@ skills/
 ├── README.md
 ├── README.zh.md
 ├── scripts/
-│   ├── sync_skills.py
+│   ├── generate_readme_sections.py
 │   ├── install_skill.py
+│   ├── sync_skills.py
 │   └── validate_index.py
 ├── skills-index.json
 ├── general/
@@ -72,19 +73,21 @@ Use `personal-custom/` when a skill is:
 
 ## Skill Index
 
+<!-- BEGIN SKILL INDEX -->
 | Skill | Scope | Category | Purpose | Path |
 |---|---|---|---|---|
 | `cross-tool-ai-sync` | General | AI Sync | Sync shared AI context across Codex, Cursor, and Claude. | `general/ai-sync/cross-tool-ai-sync/` |
 | `project-ai-sync-bootstrap` | General | AI Sync | Bootstrap shared AI context and sync scaffolding in a new repository. | `general/ai-sync/project-ai-sync-bootstrap/` |
 | `md-browser-preview` | General | Docs | Render Markdown to HTML and preview it in a browser. | `general/docs/md-browser-preview/` |
 | `task-subagent-planner` | General | Planning | Turn task-marked requests into review-first subagent execution plans. | `general/planning/task-subagent-planner/` |
-| `skills-repo-maintainer` | General | Repository Maintenance | Use the repository maintenance scripts to sync local skills, validate the index, and manage installs. | `general/repository-maintenance/skills-repo-maintainer/` |
+| `skills-repo-maintainer` | General | Repository Maintenance | Drive install, sync, validation, and README generation workflows for this skills repository. | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | Restore the standard development environment baseline on this Mac. | `personal-custom/machine-setup/machine-dev-bootstrap/` |
 | `zsh-setup` | Personal Custom | Machine Setup | Configure and troubleshoot zsh themes, plugins, and prompt styles. | `personal-custom/machine-setup/zsh-setup/` |
 | `sketch-to-android` | Personal Custom | Design | Generate Android View-based UI code from Sketch designs. | `personal-custom/design/sketch-to-android/` |
 | `sketch-to-compose` | Personal Custom | Design | Generate Jetpack Compose UI code from Sketch designs. | `personal-custom/design/sketch-to-compose/` |
 | `parttime-work-log` | Personal Custom | Logs | Record and summarize personal part-time work logs. | `personal-custom/logs/parttime-work-log/` |
 | `work-progress-log` | Personal Custom | Logs | Track and summarize Siuper project progress notes. | `personal-custom/logs/work-progress-log/` |
+<!-- END SKILL INDEX -->
 
 The same catalog is also available in machine-readable form:
 
@@ -150,6 +153,12 @@ Validate that `skills-index.json` matches the repository contents:
 
 ```bash
 python3 scripts/validate_index.py
+```
+
+Regenerate the README skill index sections from `skills-index.json`:
+
+```bash
+python3 scripts/generate_readme_sections.py
 ```
 
 ### Sync Script
@@ -239,8 +248,9 @@ For day-to-day maintenance of this repository:
 3. Use `general/repository-maintenance/skills-repo-maintainer/` when you want the assistant to drive this workflow consistently.
 4. Run `scripts/sync_skills.py` to pull the latest local skill contents into this repository.
 5. Run `scripts/validate_index.py`.
-6. Review the git diff.
-7. Commit and push to `develop`.
+6. Run `scripts/generate_readme_sections.py` if the catalog changed.
+7. Review the git diff.
+8. Commit and push to `develop`.
 
 ## Contribution Workflow
 
@@ -252,7 +262,7 @@ For a new or updated skill:
 4. Update `skills-index.json`.
 5. Ensure `scripts/install_skill.py --list` still reflects the new catalog correctly.
 6. Run `scripts/validate_index.py`.
-7. Update the README index if the catalog changed.
+7. Run `scripts/generate_readme_sections.py` if the catalog changed.
 8. Commit to `develop`.
 
 ## Quality Bar

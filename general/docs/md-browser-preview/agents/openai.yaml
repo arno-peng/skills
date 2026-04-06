@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Browser Preview"
+  short_description: "Render markdown into a browser-ready preview"
+  default_prompt: "Use $md-browser-preview to render this markdown file and open a browser preview."

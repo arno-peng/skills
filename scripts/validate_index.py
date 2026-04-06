@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 
-import json
 import sys
 from pathlib import Path
 from typing import Dict, List, Set
 
+from lib.skills_repo import load_index, repo_root
+
 
 VALID_SCOPES = set(["general", "personal-custom"])
-
-
-def load_index(index_path: Path) -> List[Dict]:
-    with index_path.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    if not isinstance(data, list):
-        raise ValueError("skills-index.json must contain a top-level list")
-    return data
 
 
 def discover_repo_skills(repo_root: Path) -> Set[str]:
@@ -28,7 +21,7 @@ def discover_repo_skills(repo_root: Path) -> Set[str]:
 
 def validate_entry(entry: Dict, repo_root: Path) -> List[str]:
     errors = []
-    required = ["name", "scope", "category", "path", "portable", "summary"]
+    required = ["name", "scope", "category", "path", "portable", "summary", "summary_zh"]
     for key in required:
         if key not in entry:
             errors.append("missing key `{}` in entry {}".format(key, entry))
@@ -80,11 +73,11 @@ def validate_entry(entry: Dict, repo_root: Path) -> List[str]:
 
 
 def main() -> int:
-    repo_root = Path(__file__).resolve().parents[1]
-    index_path = repo_root / "skills-index.json"
-    entries = load_index(index_path)
+    root = repo_root()
+    entries = load_index()
 
     errors = []
+    warnings = []
     names = set()
     paths = set()
     indexed_paths = set()
@@ -101,9 +94,26 @@ def main() -> int:
         if path:
             paths.add(path)
             indexed_paths.add(path)
-        errors.extend(validate_entry(entry, repo_root))
+        errors.extend(validate_entry(entry, root))
+        skill_md = root / path / "SKILL.md" if path else None
+        scripts_dir = root / path / "scripts" if path else None
+        if skill_md and skill_md.is_file():
+            line_count = sum(1 for _ in skill_md.open("r", encoding="utf-8"))
+            has_scripts = scripts_dir.is_dir() and any(scripts_dir.iterdir())
+            if line_count > 120:
+                warnings.append(
+                    "skill `{}` is long ({} lines); consider references or scripts".format(
+                        name, line_count
+                    )
+                )
+            if line_count > 80 and not has_scripts:
+                warnings.append(
+                    "skill `{}` is {} lines with no scripts/; verify it benefits from being a skill".format(
+                        name, line_count
+                    )
+                )
 
-    discovered = discover_repo_skills(repo_root)
+    discovered = discover_repo_skills(root)
     unindexed = sorted(discovered - indexed_paths)
     missing = sorted(indexed_paths - discovered)
 
@@ -116,6 +126,9 @@ def main() -> int:
         for error in errors:
             print("ERROR: {}".format(error), file=sys.stderr)
         return 1
+
+    for warning in warnings:
+        print("WARN: {}".format(warning), file=sys.stderr)
 
     print("Index validation passed.")
     print("Indexed skills: {}".format(len(entries)))

@@ -1,19 +1,12 @@
 #!/usr/bin/env python3
 
 import argparse
-import json
 import shutil
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
-
-def load_index(index_path: Path) -> List[Dict]:
-    with index_path.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    if not isinstance(data, list):
-        raise ValueError("skills-index.json must contain a top-level list")
-    return data
+from lib.skills_repo import load_index, repo_root
 
 
 def resolve_source_roots(source_roots: List[str]) -> List[Path]:
@@ -24,7 +17,13 @@ def find_source_dir(
     skill_name: str,
     source_roots: List[Path],
     explicit_dirs: List[Path],
+    preferred_roots: List[Path],
+    source_map: Dict[str, Path],
 ) -> Optional[Path]:
+    mapped = source_map.get(skill_name)
+    if mapped and (mapped / "SKILL.md").is_file():
+        return mapped
+
     candidates = []
 
     for source_dir in explicit_dirs:
@@ -46,6 +45,14 @@ def find_source_dir(
 
     if not unique:
         return None
+
+    for preferred_root in preferred_roots:
+        for candidate in unique:
+            try:
+                candidate.resolve().relative_to(preferred_root.resolve())
+                return candidate
+            except ValueError:
+                continue
 
     if len(unique) > 1:
         print(
@@ -92,17 +99,28 @@ def main() -> int:
         default=[],
         help="Explicit source skill directory",
     )
+    parser.add_argument(
+        "--prefer-root",
+        action="append",
+        default=[],
+        help="Prefer matches under this root when multiple sources exist",
+    )
+    parser.add_argument(
+        "--source-map",
+        action="append",
+        default=[],
+        help="Pin one skill to one source dir using name=/absolute/path/to/skill",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Preview only")
     args = parser.parse_args()
 
     if not args.all and not args.skills:
         parser.error("Provide skill names or use --all.")
-    if not args.source_root and not args.source_dir:
-        parser.error("Provide at least one --source-root or --source-dir.")
+    if not args.source_root and not args.source_dir and not args.source_map:
+        parser.error("Provide at least one --source-root, --source-dir, or --source-map.")
 
-    repo_root = Path(__file__).resolve().parents[1]
-    index_path = repo_root / "skills-index.json"
-    entries = load_index(index_path)
+    root = repo_root()
+    entries = load_index()
     index_by_name = {entry["name"]: entry for entry in entries}
 
     selected_names = list(index_by_name.keys()) if args.all else args.skills
@@ -113,10 +131,19 @@ def main() -> int:
 
     source_roots = resolve_source_roots(args.source_root)
     explicit_dirs = [Path(path).expanduser().resolve() for path in args.source_dir]
+    preferred_roots = resolve_source_roots(args.prefer_root)
+    source_map = {}
+    for item in args.source_map:
+        if "=" not in item:
+            parser.error("--source-map must look like skill-name=/abs/path/to/skill")
+        name, path = item.split("=", 1)
+        source_map[name] = Path(path).expanduser().resolve()
 
     for name in selected_names:
-        destination_dir = repo_root / index_by_name[name]["path"]
-        source_dir = find_source_dir(name, source_roots, explicit_dirs)
+        destination_dir = root / index_by_name[name]["path"]
+        source_dir = find_source_dir(
+            name, source_roots, explicit_dirs, preferred_roots, source_map
+        )
         if source_dir is None:
             if (destination_dir / "SKILL.md").is_file():
                 print(

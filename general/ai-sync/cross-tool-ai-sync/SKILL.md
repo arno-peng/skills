@@ -30,3 +30,5 @@ python3 .codex/skills/cross-tool-ai-sync/scripts/sync_ai_tooling.py
 3. If the behavior should be reusable in Codex, add or update a skill under `.codex/skills/`.
 4. Run the sync script to regenerate Cursor and Claude adapter files.
 5. Keep `AGENTS.md` and `CLAUDE.md` as stable entrypoints that point back to the shared source.
+
+Use `project-ai-sync-bootstrap` only when the repository does not already have the sync system installed.

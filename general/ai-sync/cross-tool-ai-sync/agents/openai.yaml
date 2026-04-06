@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cross Tool AI Sync"
+  short_description: "Sync shared AI context across local coding tools"
+  default_prompt: "Use $cross-tool-ai-sync to update shared AI context and regenerate Codex, Cursor, and Claude adapters."

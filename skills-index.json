@@ -5,7 +5,8 @@
     "category": "ai-sync",
     "path": "general/ai-sync/cross-tool-ai-sync",
     "portable": true,
-    "summary": "Sync shared AI context across Codex, Cursor, and Claude."
+    "summary": "Sync shared AI context across Codex, Cursor, and Claude.",
+    "summary_zh": "在 Codex、Cursor、Claude 之间同步共享 AI 上下文。"
   },
   {
     "name": "project-ai-sync-bootstrap",
@@ -13,7 +14,8 @@
     "category": "ai-sync",
     "path": "general/ai-sync/project-ai-sync-bootstrap",
     "portable": true,
-    "summary": "Bootstrap shared AI context and sync scaffolding in a new repository."
+    "summary": "Bootstrap shared AI context and sync scaffolding in a new repository.",
+    "summary_zh": "为新仓库初始化共享 AI 上下文和同步骨架。"
   },
   {
     "name": "md-browser-preview",
@@ -21,7 +23,8 @@
     "category": "docs",
     "path": "general/docs/md-browser-preview",
     "portable": true,
-    "summary": "Render Markdown to HTML and preview it in a browser."
+    "summary": "Render Markdown to HTML and preview it in a browser.",
+    "summary_zh": "将 Markdown 渲染成 HTML 并在浏览器中预览。"
   },
   {
     "name": "task-subagent-planner",
@@ -29,7 +32,8 @@
     "category": "planning",
     "path": "general/planning/task-subagent-planner",
     "portable": true,
-    "summary": "Turn task-marked requests into review-first subagent execution plans."
+    "summary": "Turn task-marked requests into review-first subagent execution plans.",
+    "summary_zh": "把任务型请求拆成待确认的 subagent 执行方案。"
   },
   {
     "name": "skills-repo-maintainer",
@@ -37,7 +41,8 @@
     "category": "repository-maintenance",
     "path": "general/repository-maintenance/skills-repo-maintainer",
     "portable": true,
-    "summary": "Drive install, sync, and validation workflows for this skills repository."
+    "summary": "Drive install, sync, validation, and README generation workflows for this skills repository.",
+    "summary_zh": "用仓库维护脚本统一做 skill 安装、同步、索引校验和 README 索引生成。"
   },
   {
     "name": "machine-dev-bootstrap",
@@ -45,7 +50,8 @@
     "category": "machine-setup",
     "path": "personal-custom/machine-setup/machine-dev-bootstrap",
     "portable": false,
-    "summary": "Restore the standard development environment baseline on this Mac."
+    "summary": "Restore the standard development environment baseline on this Mac.",
+    "summary_zh": "恢复这台 Mac 的标准开发环境基线。"
   },
   {
     "name": "zsh-setup",
@@ -53,7 +59,8 @@
     "category": "machine-setup",
     "path": "personal-custom/machine-setup/zsh-setup",
     "portable": false,
-    "summary": "Configure and troubleshoot zsh themes, plugins, and prompt styles."
+    "summary": "Configure and troubleshoot zsh themes, plugins, and prompt styles.",
+    "summary_zh": "配置和排查 zsh 主题、插件和提示符。"
   },
   {
     "name": "sketch-to-android",
@@ -61,7 +68,8 @@
     "category": "design",
     "path": "personal-custom/design/sketch-to-android",
     "portable": false,
-    "summary": "Generate Android View-based UI code from Sketch designs."
+    "summary": "Generate Android View-based UI code from Sketch designs.",
+    "summary_zh": "将 Sketch 设计稿转换为 Android View UI 代码。"
   },
   {
     "name": "sketch-to-compose",
@@ -69,7 +77,8 @@
     "category": "design",
     "path": "personal-custom/design/sketch-to-compose",
     "portable": false,
-    "summary": "Generate Jetpack Compose UI code from Sketch designs."
+    "summary": "Generate Jetpack Compose UI code from Sketch designs.",
+    "summary_zh": "将 Sketch 设计稿转换为 Jetpack Compose 代码。"
   },
   {
     "name": "parttime-work-log",
@@ -77,7 +86,8 @@
     "category": "logs",
     "path": "personal-custom/logs/parttime-work-log",
     "portable": false,
-    "summary": "Record and summarize personal part-time work logs."
+    "summary": "Record and summarize personal part-time work logs.",
+    "summary_zh": "记录和汇总个人兼职工作日志。"
   },
   {
     "name": "work-progress-log",
@@ -85,6 +95,7 @@
     "category": "logs",
     "path": "personal-custom/logs/work-progress-log",
     "portable": false,
-    "summary": "Track and summarize Siuper project progress notes."
+    "summary": "Track and summarize Siuper project progress notes.",
+    "summary_zh": "记录和汇总 Siuper 项目进度。"
   }
 ]

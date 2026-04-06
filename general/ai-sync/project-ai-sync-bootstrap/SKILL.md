@@ -18,20 +18,14 @@ Trigger this skill when the user asks to:
 
 ## What This Creates
 
-In the target repository, create:
+Run the initializer script to create the shared AI context source, local sync skill, and managed adapter files.
 
-- `.ai/shared/PROJECT_AI_CONTEXT.md`
-- `.ai/shared/AI_SYNC_POLICY.md`
-- `.codex/skills/cross-tool-ai-sync/SKILL.md`
-- `.codex/skills/cross-tool-ai-sync/scripts/sync_ai_tooling.py`
-- `.cursor/rules/000-shared-ai-context.mdc`
-- `.cursor/commands/sync-ai-context.md`
-- `.claude/commands/sync-ai-context.md`
+Key outputs include:
 
-And ensure project entrypoints reference the shared source:
-
-- `AGENTS.md`
-- `CLAUDE.md`
+- `.ai/shared/*`
+- `.codex/skills/cross-tool-ai-sync/*`
+- managed Cursor and Claude adapters
+- `AGENTS.md` and `CLAUDE.md` pointers
 
 ## Command
 
@@ -61,4 +55,3 @@ python3 ~/.codex/skills/project-ai-sync-bootstrap/scripts/init_project_ai_sync.p
 - Keep reusable project-local behavior in `.codex/skills/*`.
 - Do not maintain generated Cursor/Claude adapter files by hand.
 - If `AGENTS.md` or `CLAUDE.md` already exist, preserve existing content and append the sync section if missing.
-

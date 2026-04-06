@@ -27,8 +27,9 @@ skills/
 ├── README.md
 ├── README.zh.md
 ├── scripts/
-│   ├── sync_skills.py
+│   ├── generate_readme_sections.py
 │   ├── install_skill.py
+│   ├── sync_skills.py
 │   └── validate_index.py
 ├── skills-index.json
 ├── general/
@@ -72,19 +73,21 @@ skills/
 
 ## Skill 索引
 
+<!-- BEGIN SKILL INDEX -->
 | Skill | 范围 | 分类 | 用途 | 路径 |
 |---|---|---|---|---|
 | `cross-tool-ai-sync` | General | AI Sync | 在 Codex、Cursor、Claude 之间同步共享 AI 上下文。 | `general/ai-sync/cross-tool-ai-sync/` |
 | `project-ai-sync-bootstrap` | General | AI Sync | 为新仓库初始化共享 AI 上下文和同步骨架。 | `general/ai-sync/project-ai-sync-bootstrap/` |
 | `md-browser-preview` | General | Docs | 将 Markdown 渲染成 HTML 并在浏览器中预览。 | `general/docs/md-browser-preview/` |
 | `task-subagent-planner` | General | Planning | 把任务型请求拆成待确认的 subagent 执行方案。 | `general/planning/task-subagent-planner/` |
-| `skills-repo-maintainer` | General | Repository Maintenance | 用仓库维护脚本统一做 skill 安装、同步和索引校验。 | `general/repository-maintenance/skills-repo-maintainer/` |
+| `skills-repo-maintainer` | General | Repository Maintenance | 用仓库维护脚本统一做 skill 安装、同步、索引校验和 README 索引生成。 | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | 恢复这台 Mac 的标准开发环境基线。 | `personal-custom/machine-setup/machine-dev-bootstrap/` |
 | `zsh-setup` | Personal Custom | Machine Setup | 配置和排查 zsh 主题、插件和提示符。 | `personal-custom/machine-setup/zsh-setup/` |
 | `sketch-to-android` | Personal Custom | Design | 将 Sketch 设计稿转换为 Android View UI 代码。 | `personal-custom/design/sketch-to-android/` |
 | `sketch-to-compose` | Personal Custom | Design | 将 Sketch 设计稿转换为 Jetpack Compose 代码。 | `personal-custom/design/sketch-to-compose/` |
 | `parttime-work-log` | Personal Custom | Logs | 记录和汇总个人兼职工作日志。 | `personal-custom/logs/parttime-work-log/` |
 | `work-progress-log` | Personal Custom | Logs | 记录和汇总 Siuper 项目进度。 | `personal-custom/logs/work-progress-log/` |
+<!-- END SKILL INDEX -->
 
 同一份目录也提供机器可读索引：
 
@@ -150,6 +153,12 @@ python3 scripts/install_skill.py sketch-to-compose --target-dir /absolute/path/t
 
 ```bash
 python3 scripts/validate_index.py
+```
+
+根据 `skills-index.json` 重新生成 README 索引区块：
+
+```bash
+python3 scripts/generate_readme_sections.py
 ```
 
 ### 同步脚本
@@ -239,8 +248,9 @@ cp -R /path/to/skills/general/planning/task-subagent-planner .codex/skills/
 3. 如果希望助手统一驱动维护流程，使用 `general/repository-maintenance/skills-repo-maintainer/`
 4. 执行 `scripts/sync_skills.py`，把本机最新 skill 内容同步进仓库
 5. 执行 `scripts/validate_index.py`
-6. 检查 git diff
-7. 提交并推送到 `develop`
+6. 如果目录索引有变化，执行 `scripts/generate_readme_sections.py`
+7. 检查 git diff
+8. 提交并推送到 `develop`
 
 ## 贡献流程
 
@@ -252,7 +262,7 @@ cp -R /path/to/skills/general/planning/task-subagent-planner .codex/skills/
 4. 更新 `skills-index.json`
 5. 确认 `scripts/install_skill.py --list` 输出正确
 6. 运行 `scripts/validate_index.py`
-7. 如果公开目录或索引有变化，同步更新 README
+7. 如果公开目录或索引有变化，运行 `scripts/generate_readme_sections.py`
 8. 提交到 `develop`
 
 ## 质量标准

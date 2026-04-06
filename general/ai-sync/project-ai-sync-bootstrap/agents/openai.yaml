@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project AI Sync Bootstrap"
+  short_description: "Initialize cross-tool AI sync in a repository"
+  default_prompt: "Use $project-ai-sync-bootstrap to install the shared AI context and adapter sync system in this repository."

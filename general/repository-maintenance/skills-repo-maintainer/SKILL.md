@@ -1,109 +1,55 @@
 ---
 name: skills-repo-maintainer
-description: Use when the user wants to maintain this skills repository, sync local skill source folders into it, validate `skills-index.json`, or install indexed skills into `.codex/skills/` or `.cursor/skills/` using the repository's maintenance scripts.
+description: Use when the user wants to maintain this skills repository, sync local skill sources into it, validate `skills-index.json`, or install indexed skills with the repository maintenance scripts.
 ---
 
 # Skills Repo Maintainer
 
-Use this skill when working inside this repository or when using this repository as the source of truth for skill distribution.
+Use this skill when working inside this repository or when using it as the source of truth for skill distribution.
 
-## What this skill covers
+## Scripts
 
-This skill orchestrates these repository scripts:
+This skill orchestrates:
 
 - `scripts/install_skill.py`
 - `scripts/sync_skills.py`
 - `scripts/validate_index.py`
+- `scripts/generate_readme_sections.py`
 
-## When to use
+## When To Use
 
 Apply this skill when the user wants to:
 
 - add or update a skill in this repository
 - sync local skill source directories into this repository
-- validate that `skills-index.json` matches the repository contents
-- install one or more indexed skills into a project's `.codex/skills/` or `.cursor/skills/`
-- review or maintain the repository catalog and structure
+- validate `skills-index.json`
+- regenerate README skill index sections
+- install indexed skills into `.codex/skills/` or `.cursor/skills/`
 
 ## Workflow
 
-1. Identify whether the task is `install`, `sync`, `validate`, or a combined maintenance flow.
-2. If the repository catalog changes, update both:
-   - `skills-index.json`
-   - `README.md` when the public index or structure changed
-3. Use `scripts/sync_skills.py` when local source folders are the canonical source and this repository should be refreshed from them.
-4. Use `scripts/validate_index.py` after structural changes or catalog edits.
-5. Review the resulting diff before committing.
+1. Decide whether the task is `install`, `sync`, `validate`, `generate-readme`, or a combined maintenance flow.
+2. Treat `skills-index.json` as the machine-readable catalog.
+3. If the catalog or structure changes, regenerate README skill index sections.
+4. Review the diff before committing.
 
 ## Script Selection
 
-Use `scripts/install_skill.py` for:
+Use `scripts/install_skill.py` for listing or installing indexed skills.
 
-- listing available skills
-- installing skills into `.codex/skills/`
-- installing skills into `.cursor/skills/`
-- overwriting an existing local installation with `--force`
+Use `scripts/sync_skills.py` for refreshing this repository from local source roots. Prefer `--dry-run` first when multiple roots may contain the same skill.
 
-Use `scripts/sync_skills.py` for:
+Use `scripts/validate_index.py` for structural checks, missing `SKILL.md`, and soft quality warnings.
 
-- copying local skill source directories into this repository
-- refreshing many indexed skills from known source roots
-- previewing maintenance actions with `--dry-run`
-
-Use `scripts/validate_index.py` for:
-
-- checking `skills-index.json`
-- detecting missing `SKILL.md`
-- detecting path, scope, or category mismatches
-- detecting unindexed skill directories
-
-## Common Commands
-
-List indexed skills:
-
-```bash
-python3 scripts/install_skill.py --list
-```
-
-Sync indexed skills from local roots:
-
-```bash
-python3 scripts/sync_skills.py --all \
-  --source-root ~/.codex/skills \
-  --source-root ~/project/Siuper/siuper-sdk-android/.codex/skills \
-  --source-root ~/project/Siuper/.codex/skills
-```
-
-Preview a sync:
-
-```bash
-python3 scripts/sync_skills.py --all \
-  --source-root ~/.codex/skills \
-  --source-root ~/project/Siuper/siuper-sdk-android/.codex/skills \
-  --source-root ~/project/Siuper/.codex/skills \
-  --dry-run
-```
-
-Validate the catalog:
-
-```bash
-python3 scripts/validate_index.py
-```
-
-Install one skill into the current project's Codex skills directory:
-
-```bash
-python3 scripts/install_skill.py md-browser-preview --tool codex --project-root .
-```
+Use `scripts/generate_readme_sections.py` to regenerate the README skill index blocks from `skills-index.json`.
 
 ## Rules
 
-- Treat `skills-index.json` as the machine-readable catalog.
-- Keep skill folder names aligned with the indexed `name`.
+- Keep skill folder names aligned with indexed `name`.
 - Keep category paths aligned with indexed `scope` and `category`.
 - Do not silently change category layout without updating both the index and README.
-- Prefer `--dry-run` before broad sync operations when the source roots may be ambiguous.
-- If multiple source roots contain the same skill, inspect the warning and make sure the chosen source is the intended one.
+- If multiple source roots contain the same skill, use `--prefer-root` or `--source-map`.
+- Keep detailed command examples in `references/commands.md`, not in the main skill body.
 
 ## Output Expectations
 
@@ -113,3 +59,7 @@ When making maintenance changes, report:
 - which skills were installed or synced
 - whether validation passed
 - any ambiguous source-root choices or follow-up risks
+
+For command examples, read:
+
+- `references/commands.md`
