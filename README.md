@@ -34,6 +34,7 @@ skills/
 ├── skills-index.json
 ├── general/
 │   ├── ai-sync/
+│   ├── design/
 │   ├── docs/
 │   ├── planning/
 │   └── repository-maintenance/
@@ -47,6 +48,7 @@ skills/
 
 - `general/`: Reusable skills that are broadly applicable across projects and workflows.
   - `ai-sync/`: Skills for shared AI context bootstrap and synchronization.
+  - `design/`: Portable design-to-code workflows.
   - `docs/`: Skills for documentation rendering and review workflows.
   - `planning/`: Skills for task decomposition and execution planning.
   - `repository-maintenance/`: Skills for maintaining this skills repository and its catalog.
@@ -79,6 +81,7 @@ Use `personal-custom/` when a skill is:
 | `cross-tool-ai-sync` | General | AI Sync | Sync shared AI context across Codex, Cursor, and Claude. | `general/ai-sync/cross-tool-ai-sync/` |
 | `project-ai-sync-bootstrap` | General | AI Sync | Bootstrap shared AI context and sync scaffolding in a new repository. | `general/ai-sync/project-ai-sync-bootstrap/` |
 | `md-browser-preview` | General | Docs | Render Markdown to HTML and preview it in a browser. | `general/docs/md-browser-preview/` |
+| `sketch-to-android-ui-restore` | General | Design | Restore local Sketch designs into Android UI with configurable project paths and device validation. | `general/design/sketch-to-android-ui-restore/` |
 | `task-subagent-planner` | General | Planning | Turn task-marked requests into review-first subagent execution plans. | `general/planning/task-subagent-planner/` |
 | `skills-repo-maintainer` | General | Repository Maintenance | Drive install, sync, validation, and README generation workflows for this skills repository. | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | Restore the standard development environment baseline on this Mac. | `personal-custom/machine-setup/machine-dev-bootstrap/` |
@@ -96,6 +99,7 @@ The same catalog is also available in machine-readable form:
 ## How To Choose
 
 - Choose `general/ai-sync/*` when you want to bootstrap or maintain cross-tool AI instructions.
+- Choose `general/design/*` when you want portable design-to-code workflows that are not tied to one private project.
 - Choose `general/docs/*` when you need document rendering or review helpers.
 - Choose `general/planning/*` when you want the assistant to decompose work before execution.
 - Choose `general/repository-maintenance/*` when you want to maintain this repository itself, sync local skill sources, or validate the catalog.

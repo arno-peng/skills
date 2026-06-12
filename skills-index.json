@@ -27,6 +27,15 @@
     "summary_zh": "将 Markdown 渲染成 HTML 并在浏览器中预览。"
   },
   {
+    "name": "sketch-to-android-ui-restore",
+    "scope": "general",
+    "category": "design",
+    "path": "general/design/sketch-to-android-ui-restore",
+    "portable": true,
+    "summary": "Restore local Sketch designs into Android UI with configurable project paths and device validation.",
+    "summary_zh": "将本地 Sketch 设计稿还原到 Android UI，支持可配置项目路径与真机验证。"
+  },
+  {
     "name": "task-subagent-planner",
     "scope": "general",
     "category": "planning",

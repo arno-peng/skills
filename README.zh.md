@@ -34,6 +34,7 @@ skills/
 ├── skills-index.json
 ├── general/
 │   ├── ai-sync/
+│   ├── design/
 │   ├── docs/
 │   ├── planning/
 │   └── repository-maintenance/
@@ -47,6 +48,7 @@ skills/
 
 - `general/`：广泛适用于多个项目和工作流的可复用技能
   - `ai-sync/`：共享 AI 上下文初始化与同步相关 skills
+  - `design/`：可跨项目复用的设计稿转代码流程
   - `docs/`：文档渲染、预览和审阅相关 skills
   - `planning/`：任务拆分和执行规划相关 skills
   - `repository-maintenance/`：维护本 skills 仓库及目录索引的 skills
@@ -79,6 +81,7 @@ skills/
 | `cross-tool-ai-sync` | General | AI Sync | 在 Codex、Cursor、Claude 之间同步共享 AI 上下文。 | `general/ai-sync/cross-tool-ai-sync/` |
 | `project-ai-sync-bootstrap` | General | AI Sync | 为新仓库初始化共享 AI 上下文和同步骨架。 | `general/ai-sync/project-ai-sync-bootstrap/` |
 | `md-browser-preview` | General | Docs | 将 Markdown 渲染成 HTML 并在浏览器中预览。 | `general/docs/md-browser-preview/` |
+| `sketch-to-android-ui-restore` | General | Design | 将本地 Sketch 设计稿还原到 Android UI，支持可配置项目路径与真机验证。 | `general/design/sketch-to-android-ui-restore/` |
 | `task-subagent-planner` | General | Planning | 把任务型请求拆成待确认的 subagent 执行方案。 | `general/planning/task-subagent-planner/` |
 | `skills-repo-maintainer` | General | Repository Maintenance | 用仓库维护脚本统一做 skill 安装、同步、索引校验和 README 索引生成。 | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | 恢复这台 Mac 的标准开发环境基线。 | `personal-custom/machine-setup/machine-dev-bootstrap/` |
@@ -96,6 +99,7 @@ skills/
 ## 如何选择 skill
 
 - 需要初始化或维护跨工具 AI 指令时，用 `general/ai-sync/*`
+- 需要不绑定私有项目的通用设计稿转代码流程时，用 `general/design/*`
 - 需要文档渲染、预览或阅读辅助时，用 `general/docs/*`
 - 需要在执行前先拆分任务时，用 `general/planning/*`
 - 需要维护这个 skills 仓库本身时，用 `general/repository-maintenance/*`

@@ -1,0 +1,15 @@
+interface:
+  display_name: "Sketch To Android UI Restore"
+  short_description: "Restore Sketch designs into Android UI with device validation"
+  default_prompt: "Use $sketch-to-android-ui-restore to restore a local .sketch design into this Android project. Extract Sketch details, infer the Android target, implement the UI, validate with build/device screenshots, and write a visual report."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "sketch"
+      description: "Sketch MCP server for reading local Sketch documents, extracting layer data, and exporting assets."
+      transport: "streamable_http"
+      url: "http://localhost:31126/mcp"
+
+policy:
+  allow_implicit_invocation: true
