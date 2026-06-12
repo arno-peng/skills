@@ -83,7 +83,7 @@ skills/
 | `skills-repo-maintainer` | General | Repository Maintenance | 用仓库维护脚本统一做 skill 安装、同步、索引校验和 README 索引生成。 | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | 恢复这台 Mac 的标准开发环境基线。 | `personal-custom/machine-setup/machine-dev-bootstrap/` |
 | `zsh-setup` | Personal Custom | Machine Setup | 配置和排查 zsh 主题、插件和提示符。 | `personal-custom/machine-setup/zsh-setup/` |
-| `sketch-to-android` | Personal Custom | Design | 将 Sketch 设计稿转换为 Android View UI 代码。 | `personal-custom/design/sketch-to-android/` |
+| `sketch-to-android` | Personal Custom | Design | 将本地 Sketch 设计稿像素级还原到 Siuper Android UI，并参考 iOS 与真机验证。 | `personal-custom/design/sketch-to-android/` |
 | `sketch-to-compose` | Personal Custom | Design | 将 Sketch 设计稿转换为 Jetpack Compose 代码。 | `personal-custom/design/sketch-to-compose/` |
 | `parttime-work-log` | Personal Custom | Logs | 记录和汇总个人兼职工作日志。 | `personal-custom/logs/parttime-work-log/` |
 | `work-progress-log` | Personal Custom | Logs | 记录和汇总 Siuper 项目进度。 | `personal-custom/logs/work-progress-log/` |

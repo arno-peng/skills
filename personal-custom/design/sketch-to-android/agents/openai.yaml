@@ -1,0 +1,15 @@
+interface:
+  display_name: "Sketch To Android"
+  short_description: "UI还原：从本地 Sketch 文件像素级复原 Android UI 并真机验证"
+  default_prompt: "使用 $sketch-to-android 执行 UI还原。我会上传本地 .sketch 文件，请从 Sketch 提取设计、对比 ../../Siuper_ios，实现到当前 Android SDK，并通过 ../dolphinai-and 编译安装真机截图验证。"
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "sketch"
+      description: "Sketch MCP server for reading local Sketch documents, extracting layer data, and exporting assets."
+      transport: "streamable_http"
+      url: "http://localhost:31126/mcp"
+
+policy:
+  allow_implicit_invocation: true

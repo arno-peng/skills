@@ -68,8 +68,8 @@
     "category": "design",
     "path": "personal-custom/design/sketch-to-android",
     "portable": false,
-    "summary": "Generate Android View-based UI code from Sketch designs.",
-    "summary_zh": "将 Sketch 设计稿转换为 Android View UI 代码。"
+    "summary": "Pixel-restore local Sketch designs into Siuper Android UI with iOS reference and device validation.",
+    "summary_zh": "将本地 Sketch 设计稿像素级还原到 Siuper Android UI，并参考 iOS 与真机验证。"
   },
   {
     "name": "sketch-to-compose",

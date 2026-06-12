@@ -83,7 +83,7 @@ Use `personal-custom/` when a skill is:
 | `skills-repo-maintainer` | General | Repository Maintenance | Drive install, sync, validation, and README generation workflows for this skills repository. | `general/repository-maintenance/skills-repo-maintainer/` |
 | `machine-dev-bootstrap` | Personal Custom | Machine Setup | Restore the standard development environment baseline on this Mac. | `personal-custom/machine-setup/machine-dev-bootstrap/` |
 | `zsh-setup` | Personal Custom | Machine Setup | Configure and troubleshoot zsh themes, plugins, and prompt styles. | `personal-custom/machine-setup/zsh-setup/` |
-| `sketch-to-android` | Personal Custom | Design | Generate Android View-based UI code from Sketch designs. | `personal-custom/design/sketch-to-android/` |
+| `sketch-to-android` | Personal Custom | Design | Pixel-restore local Sketch designs into Siuper Android UI with iOS reference and device validation. | `personal-custom/design/sketch-to-android/` |
 | `sketch-to-compose` | Personal Custom | Design | Generate Jetpack Compose UI code from Sketch designs. | `personal-custom/design/sketch-to-compose/` |
 | `parttime-work-log` | Personal Custom | Logs | Record and summarize personal part-time work logs. | `personal-custom/logs/parttime-work-log/` |
 | `work-progress-log` | Personal Custom | Logs | Track and summarize Siuper project progress notes. | `personal-custom/logs/work-progress-log/` |
