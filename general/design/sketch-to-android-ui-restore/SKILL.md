@@ -48,6 +48,30 @@ Infer these from the current workspace when safe. Ask only for values that canno
 
 Do not hard-code private project names, sibling directories, package names, branches, or Gradle variants.
 
+## Project Path Inference
+
+Before implementation, try to infer and confirm the Android project root, optional iOS reference project, and optional `dolphinai-and` host app path.
+
+Inference order:
+
+1. Android project root: prefer the current working directory. If it is not an Android/Gradle repository, walk upward until a directory containing `settings.gradle`, `settings.gradle.kts`, `build.gradle`, `build.gradle.kts`, or `gradlew` is found.
+2. iOS reference project: prefer a user-provided path. Otherwise search nearby workspace roots for likely iOS projects, including sibling directories, names containing `ios`, and directories containing `.xcodeproj`, `.xcworkspace`, or `Package.swift`.
+3. `dolphinai-and` host app: prefer a user-provided path. Otherwise search nearby workspace roots for `dolphinai-and`, including `../dolphinai-and`, same-parent/sibling workspaces, and common local workspace roots when accessible. Prefer the candidate that shares the closest parent directory with the Android project.
+
+If the iOS path cannot be inferred and an iOS reference is needed, ask exactly:
+
+```text
+请提供 ios项目的地址
+```
+
+If the `dolphinai-and` path cannot be inferred and host-app validation requires it, ask exactly:
+
+```text
+请提供dolphinai-and项目地址
+```
+
+If both paths are missing, ask both questions. If only one is missing, ask only for that path. After the user provides paths, continue and record the resolved paths in `FINAL_REPORT.md`.
+
 ## Source Priority
 
 When Sketch, a reference implementation, and current Android behavior disagree:
@@ -106,10 +130,11 @@ Prefer non-code reproduction: typing test queries, clearing local history throug
 1. Check `git status`, current branch, Android project root, and relevant repo docs.
 2. Confirm the Sketch file exists and can be read.
 3. Check Sketch MCP availability. If MCP fails, use `sketchtool`, unpacked `.sketch` JSON, or another verifiable local extraction fallback.
-4. Detect Android stack, target module, build system, and likely screen entry.
-5. Check `adb devices` or emulator availability.
-6. Create a run directory such as `work/sketch-to-android-ui-restore/<timestamp>/`.
-7. Build a queue of the requested Sketch frames. If the user narrowed the scope, filter before implementation.
+4. Resolve Android project root, optional iOS reference path, and optional host app path using "Project Path Inference"; ask for missing required paths with the fixed prompts above.
+5. Detect Android stack, target module, build system, and likely screen entry.
+6. Check `adb devices` or emulator availability.
+7. Create a run directory such as `work/sketch-to-android-ui-restore/<timestamp>/`.
+8. Build a queue of the requested Sketch frames. If the user narrowed the scope, filter before implementation.
 
 Do not edit code until the target Sketch frames and Android target are clear.
 

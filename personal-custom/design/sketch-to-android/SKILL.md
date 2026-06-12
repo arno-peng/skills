@@ -43,16 +43,40 @@ description: "当用户说“UI还原”“UI 还原”“还原 UI”，并上�
 - Android 宿主 App 编译与真机验证项目：`../dolphinai-and`
 - iOS 参考项目：`../../Siuper_ios`
 
-开始执行前必须确认路径存在：
+默认路径可用时可以直接采用，并确认路径存在：
 
 ```bash
 test -d ../dolphinai-and
 test -d ../../Siuper_ios
 ```
 
+如果默认路径不存在，按下面“项目路径推断”继续查找。
+
 Android UI 代码修改发生在当前 `siuper-sdk-android` 仓库中。
-编译、安装、真机截图验证必须从 `../dolphinai-and` 执行。
-iOS 对照实现默认从 `../../Siuper_ios` 读取。
+编译、安装、真机截图验证必须从已确认的 `dolphinai-and` 项目执行。
+iOS 对照实现从已确认的 iOS 项目读取。
+
+## 项目路径推断
+
+开始执行时必须先尝试推断并确认 Android SDK、`dolphinai-and` 宿主 App 和 iOS 参考项目地址，不要直接因为默认路径不存在就停止。
+
+推断顺序：
+
+1. Android SDK 项目：优先使用当前工作目录；如果当前目录不是 Android/Gradle 仓库，则向上查找包含 `settings.gradle`、`settings.gradle.kts`、`build.gradle` 或 `gradlew` 的父目录，并结合仓库名 `siuper-sdk-android` 判断。
+2. `dolphinai-and` 项目：优先使用用户已提供路径；否则依次检查当前 SDK 的兄弟目录 `../dolphinai-and`、同一工作区下的 `dolphinai-and`、以及 `/Users/arno/project/*/dolphinai-and` 这类同名前缀工作区。多个候选时，优先选择与当前 SDK 同一个父目录的候选。
+3. iOS 项目：优先使用用户已提供路径；否则依次检查 `../../Siuper_ios`、当前工作区同级的 `Siuper_ios`、`/Users/arno/project/Siuper_ios`、`/Users/arno/project/siuper-ios-*`，并确认其中存在 iOS 工程文件，例如 `.xcodeproj`、`.xcworkspace` 或 `Package.swift`。
+
+推断失败时主动向用户要路径，并使用下面固定话术：
+
+```text
+请提供 ios项目的地址
+```
+
+```text
+请提供dolphinai-and项目地址
+```
+
+如果两个路径都缺失，两句都要问；如果只缺一个，只问缺失的那个。用户提供后继续执行，并在最终报告记录实际采用的路径。
 
 ## 信息源优先级
 
@@ -114,8 +138,8 @@ UI 状态依赖搜索历史、列表数据、空态数据、滚动位置、未�
 ## 预检流程
 
 1. 检查当前仓库路径、分支和 `git status`。
-2. 确认 `../dolphinai-and` 和 `../../Siuper_ios` 存在。
-3. 确认 `../dolphinai-and/local.properties` 包含：
+2. 按“项目路径推断”确认 Android SDK、`dolphinai-and` 和 iOS 项目实际路径；无法推断时按固定话术向用户索要。
+3. 确认 `dolphinai-and/local.properties` 包含：
 
 ```properties
 siuperSourceMode=true
@@ -169,7 +193,7 @@ siuper.project.dir=../siuper-sdk-android
 
 ### 3. 分析 iOS 实现
 
-默认从 `../../Siuper_ios` 查找对应页面或组件实现。
+默认从已确认的 iOS 项目路径查找对应页面或组件实现。
 
 优先搜索：
 
@@ -232,12 +256,12 @@ siuper.project.dir=../siuper-sdk-android
 
 ## 编译与安装规则
 
-Android SDK 代码修改完成后，真实设备验证必须构建宿主 App `../dolphinai-and`。
+Android SDK 代码修改完成后，真实设备验证必须构建已确认的 `dolphinai-and` 宿主 App。
 
 从当前 `siuper-sdk-android` 仓库执行时，使用：
 
 ```bash
-cd ../dolphinai-and
+cd <dolphinai-and 项目路径>
 ```
 
 常用命令：
@@ -259,12 +283,12 @@ cd ../dolphinai-and
 app/build/intermediates/apk/sitArm64/debug/app-sit-arm64-debug.apk
 ```
 
-如果构建遇到 `com.hualin.component`、`HLBase`、`HLOfflineWeb`、`offlinewebsdk` 等私有依赖问题，先检查 `../dolphinai-and/tools/maven_local/` 和本机 `~/.m2/repository`，不要立即判断为 UI 代码问题。
+如果构建遇到 `com.hualin.component`、`HLBase`、`HLOfflineWeb`、`offlinewebsdk` 等私有依赖问题，先检查 `<dolphinai-and 项目路径>/tools/maven_local/` 和本机 `~/.m2/repository`，不要立即判断为 UI 代码问题。
 
 ## 所有设计图处理完成后
 
 1. 运行当前模块适用的格式化、lint 或编译检查。
-2. 进入 `../dolphinai-and`。
+2. 进入已确认的 `dolphinai-and` 项目路径。
 3. 编译 `:app:assembleSitArm64Debug` 或直接执行 `:app:installSitArm64Debug`。
 4. 通过项目代码分析目标页面进入链路。
 5. 使用 adb 操作真机进入对应页面。
